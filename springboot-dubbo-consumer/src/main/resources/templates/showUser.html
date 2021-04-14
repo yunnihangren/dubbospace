@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--private Integer userid;
+
+private String username;
+
+private Integer usersex;
+
+private Double userprice;
+
+private String userdate;
+
+private Integer usertype;
+
+private String userimg;
+
+private String usershow;-->
+<a th:href="@{/toAddUser}">新增用户</a>
+
+<table border="1">
+    <tr>
+        <td>用户编号</td>
+        <td>用户姓名</td>
+        <td>用户性别</td>
+        <td>用户工资</td>
+        <td>用户生日</td>
+        <td>用户类型</td>
+        <td>用户头像</td>
+        <td>用户简介</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="user:${user}">
+        <td th:text="${user.userid}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.usersex==1?'男':'女'}"></td>
+        <td th:text="${user.userprice}"></td>
+        <td th:text="${user.userdate}"></td>
+        <td th:text="${user.usertype==1?'白银':'青铜'}"></td>
+        <td ><img th:src="${user.userimg}" alt ="带你去看...."  width="50px" height="50px" ></img> </td>
+        <td th:utext="${user.usershow}"></td>
+        <td >
+
+            <a th:href="@{del(id=${user.userid})}">删除</a> &nbsp;&nbsp;
+            <a th:href="@{toupdate(id=${user.userid})}">修改</a>
+
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>

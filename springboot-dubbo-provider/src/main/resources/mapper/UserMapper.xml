@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ytc.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.ytc.model.User">
+        <id column="userid" property="userid" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="usersex" property="usersex" jdbcType="INTEGER"/>
+        <result column="userprice" property="userprice" jdbcType="DOUBLE"/>
+        <result column="userdate" property="userdate" jdbcType="DATE"/>
+        <result column="usertype" property="usertype" jdbcType="INTEGER"/>
+        <result column="userimg" property="userimg" jdbcType="VARCHAR"/>
+        <result column="usershow" property="usershow" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        userid, username, usersex, userprice, userdate, usertype, userimg, usershow
+    </sql>
+    <select id="queryUserList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ytc_user
+    </select>
+    <select id="selectByPrimaryKey" resultType="com.ytc.model.User" parameterType="int">
+
+        select
+        <include refid="Base_Column_List"/>
+        from ytc_user
+        where userid = #{userid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from ytc_user
+        where userid = #{userid,jdbcType=INTEGER}
+    </delete>
+    <insert id="addUser" parameterType="com.ytc.model.User">
+        insert into ytc_user ( username, usersex,
+        userprice, userdate, usertype,
+        userimg, usershow)
+        values ( #{username,jdbcType=VARCHAR}, #{usersex,jdbcType=INTEGER},
+        #{userprice,jdbcType=DOUBLE}, #{userdate,jdbcType=DATE}, #{usertype,jdbcType=INTEGER},
+        #{userimg,jdbcType=VARCHAR}, #{usershow,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ytc.model.User">
+        insert into ytc_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="usersex != null">
+                usersex,
+            </if>
+            <if test="userprice != null">
+                userprice,
+            </if>
+            <if test="userdate != null">
+                userdate,
+            </if>
+            <if test="usertype != null">
+                usertype,
+            </if>
+            <if test="userimg != null">
+                userimg,
+            </if>
+            <if test="usershow != null">
+                usershow,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="usersex != null">
+                #{usersex,jdbcType=INTEGER},
+            </if>
+            <if test="userprice != null">
+                #{userprice,jdbcType=DOUBLE},
+            </if>
+            <if test="userdate != null">
+                #{userdate,jdbcType=DATE},
+            </if>
+            <if test="usertype != null">
+                #{usertype,jdbcType=INTEGER},
+            </if>
+            <if test="userimg != null">
+                #{userimg,jdbcType=VARCHAR},
+            </if>
+            <if test="usershow != null">
+                #{usershow,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insert"></insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ytc.model.User">
+        update ytc_user
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="usersex != null">
+                usersex = #{usersex,jdbcType=INTEGER},
+            </if>
+            <if test="userprice != null">
+                userprice = #{userprice,jdbcType=DOUBLE},
+            </if>
+            <if test="userdate != null">
+                userdate = #{userdate,jdbcType=DATE},
+            </if>
+            <if test="usertype != null">
+                usertype = #{usertype,jdbcType=INTEGER},
+            </if>
+            <if test="userimg != null">
+                userimg = #{userimg,jdbcType=VARCHAR},
+            </if>
+            <if test="usershow != null">
+                usershow = #{usershow,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ytc.model.User">
+        update ytc_user
+        set username = #{username,jdbcType=VARCHAR},
+        usersex = #{usersex,jdbcType=INTEGER},
+        userprice = #{userprice,jdbcType=DOUBLE},
+        userdate = #{userdate,jdbcType=DATE},
+        usertype = #{usertype,jdbcType=INTEGER},
+        userimg = #{userimg,jdbcType=VARCHAR},
+        usershow = #{usershow,jdbcType=VARCHAR}
+        where userid = #{userid,jdbcType=INTEGER}
+    </update>
+</mapper>
